@@ -65,6 +65,43 @@ Test utils
 > a set of programs for modeling of work environment and execution of checks
 
 ---
+@title[What is it]
+
+## A good test
+
++++
+@title[A good test: Three aspects]
+
+## A good test
+- Trustworthy
+- Maintainable
+- Readable
+
++++
+@title[A good test: Trustworthy]
+
+## Trustworthy
+If tests are failed because of misconfigurations or it's a "known issue" of some dependency
+
+No one will run them!
+
++++
+@title[A good test: Maintainable]
+
+## Maintainable
+If we spend more time for setting up, running or required changes than on actual development
+
+No one will write them!
+
++++
+@title[A good test: Readable]
+
+## Readable
+If we need much time to debug a test and figure out the reason of it's failure
+
+No one will care about "green build"
+
+---
 @title[Thank you]
 
 ## T[h]ank you!
