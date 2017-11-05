@@ -50,6 +50,22 @@
 - Freedom of choice
 
 ---
+@title[Definitions]
+
+Autotest
+  a check or group of checks, which can be executed by *one simple human action*
+
+Unittest
+  a test of a isolated part of the program (unit of work) for correctness
+
+Integrational
+  a test of interaction of several programs (or it's parts) for correctness and
+  coherence
+
+Test utils
+  a set of programs for modeling of work environment and execution of checks
+
+---
 @title[Thank you]
 
 ## T[h]ank you!
