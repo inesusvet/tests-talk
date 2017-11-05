@@ -20,6 +20,14 @@
  If the machine produces tranquility it's right.
  If it disturbs you it's wrong until either the machine or your mind is changed.
 
+---
+@title[Expectations]
+
+## Target audience
+- You know why that tests are good for your project
+- You do read & write tests on daily basis
+- You want to think ahead about testability of system
+ 
  ---
  @title[References]
 
