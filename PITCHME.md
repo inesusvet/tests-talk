@@ -27,10 +27,10 @@
 - You know why that tests are good for your project
 - You do read & write tests on daily basis
 - You want to think ahead about testability of system
- 
- ---
- @title[References]
 
- ## Further reading
- - "The art of unit testing" by Roy Oserove
- - "TDD by example" by Kent Beck
+---
+@title[References]
+
+## Further reading
+- "The art of unit testing" by Roy Oserove
+- "TDD by example" by Kent Beck
