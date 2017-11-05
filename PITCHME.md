@@ -6,10 +6,10 @@
 @title[Disclaimer]
 
 ## I am not selling
-- It's not a panacea. No particular technology/methodology
+- No particular technology or methodology will save you
 - I want to talk about very basic principles
-- All of this is based on my experience and knowledge - "biased"
-- I invite you hear your stories after the talk
+- All of this is based on my experience and knowledge
+- I invite you to share your stories after the talk
 
 ---
 @title[Epigraph]
