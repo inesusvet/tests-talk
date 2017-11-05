@@ -29,6 +29,27 @@
 - You want to think ahead about testability of system
 
 ---
+@title[5 whys]
+
+# Why do we need tests?
+
+---
+@title[5 because]
+
+# Why do we need tests?
+- Less errors (bugs)
+- Easier maintenance
+- Easier to understand/reason about
+- Easier to develop
+
+---
+@title[Extras]
+
+# Why do we need tests?
+- All parties are confident
+- Freedom of choice
+
+---
 @title[References]
 
 ## Further reading
