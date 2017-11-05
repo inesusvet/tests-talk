@@ -78,12 +78,12 @@ a set of programs for modeling of work environment and execution of checks
 ---
 @title[What is it]
 
-## A good test
+# A good test is
 
 +++
 @title[A good test: Three aspects]
 
-## A good test
+## A good test is
 - Trustworthy
 - Maintainable
 - Readable
@@ -92,9 +92,10 @@ a set of programs for modeling of work environment and execution of checks
 @title[A good test: Trustworthy]
 
 ## Trustworthy
-If tests are failed because of misconfigurations or it's a "known issue" of some dependency
+If tests are failed at start because of misconfigurations or it's a
+"known issue" of some dependency/part of the system
 
-No one will run them!
+*No one* will run them!
 
 +++
 @title[A good test: Maintainable]
@@ -102,7 +103,7 @@ No one will run them!
 ## Maintainable
 If we spend more time for setting up, running or required changes than on actual development
 
-No one will write them!
+*No one* will write them!
 
 +++
 @title[A good test: Readable]
@@ -110,7 +111,7 @@ No one will write them!
 ## Readable
 If we need much time to debug a test and figure out the reason of it's failure
 
-No one will care about "green build"
+*No one* will care about "green build"
 
 ---
 @title[Thank you]
@@ -123,7 +124,7 @@ fb.com/ivan.nesusvet
 
 ivan.styazhkin@datarobot.com
 
----
++++
 @title[References]
 
 ## Further reading
