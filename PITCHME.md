@@ -38,7 +38,7 @@
 
 ## To have
 - Less errors
-- Easier maintenance and change
+- Easier maintenance
 - Easier to understand/reason about the code
 - Easier to develop new features
 
