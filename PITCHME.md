@@ -6,7 +6,7 @@
 @title[Disclaimer]
 
 ## I am not selling
-- No particular technology or methodology will save you
+- No particular technology or methodology
 - I want to talk about very basic principles
 - All of this is based on my experience and knowledge
 - I invite you to share your stories after the talk
