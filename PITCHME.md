@@ -36,18 +36,18 @@
 +++
 @title[5 because]
 
-## Why do we need tests?
-- Less errors (bugs)
-- Easier maintenance
-- Easier to understand/reason about
-- Easier to develop
+## To have
+- Less errors
+- Easier maintenance and change
+- Easier to understand/reason about the code
+- Easier to develop new features
 
 +++
 @title[Extras]
 
-## Why do we need tests?
-- All parties are confident
-- Freedom of choice
+## Nice to have
+- Confidence to all parties (pigs & chickens)
+- Freedom of choice for a next step
 
 ---
 @title[Definitions]
