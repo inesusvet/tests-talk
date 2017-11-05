@@ -2,7 +2,7 @@
 ## The test which will save your day
 ##### by Ivan Styazhkin from DataRobot
 
----
++++
 @title[Disclaimer]
 
 ## I am not selling
@@ -11,7 +11,7 @@
 - All of this is based on my experience and knowledge
 - I invite you to share your stories after the talk
 
----
++++
 @title[Epigraph]
 
 ## Quality
@@ -20,7 +20,7 @@
  If the machine produces tranquility it's right.
  If it disturbs you it's wrong until either the machine or your mind is changed.
 
----
++++
 @title[Expectations]
 
 ## Target audience
@@ -33,7 +33,7 @@
 
 # Why do we need tests?
 
----
++++
 @title[5 because]
 
 ## Why do we need tests?
@@ -42,7 +42,7 @@
 - Easier to understand/reason about
 - Easier to develop
 
----
++++
 @title[Extras]
 
 ## Why do we need tests?
@@ -52,17 +52,28 @@
 ---
 @title[Definitions]
 
-Autotest
-> a check or group of checks, which can be executed by *one simple human action*
+## Some Definitions
+To reduce misunderstanding
 
-Unittest
-> a test of a isolated part of the program (unit of work) for correctness
++++
+@title[Definitions: Autotest]
+### Autotest
+a check or group of checks, which can be executed by *one simple human action*
 
-Integrational
-> a test of interaction of several programs (or it's parts) for correctness and coherence
++++
+@title[Definitions: Unittest]
+### Unittest
+a test of a isolated part of the program (unit of work) for correctness
 
-Test utils
-> a set of programs for modeling of work environment and execution of checks
++++
+@title[Definitions: Integration test]
+### Integration test
+a test of interaction of several programs (or it's parts) for correctness and coherence
+
++++
+@title[Definitions: Test utils]
+### Test utils
+a set of programs for modeling of work environment and execution of checks
 
 ---
 @title[What is it]
