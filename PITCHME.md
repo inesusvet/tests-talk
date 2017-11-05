@@ -50,6 +50,17 @@
 - Freedom of choice
 
 ---
+@title[Thank you]
+
+## T[h]ank you!
+
+@inesusvet
+
+fb.com/ivan.nesusvet
+
+ivan.styazhkin@datarobot.com
+
+---
 @title[References]
 
 ## Further reading
