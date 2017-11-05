@@ -19,3 +19,10 @@
  There isn't any other test.
  If the machine produces tranquility it's right.
  If it disturbs you it's wrong until either the machine or your mind is changed.
+
+ ---
+ @title[References]
+
+ ## Further reading
+ - "The art of unit testing" by Roy Oserove
+ - "TDD by example" by Kent Beck
