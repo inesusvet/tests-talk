@@ -36,7 +36,7 @@
 ---
 @title[5 because]
 
-# Why do we need tests?
+## Why do we need tests?
 - Less errors (bugs)
 - Easier maintenance
 - Easier to understand/reason about
@@ -45,7 +45,7 @@
 ---
 @title[Extras]
 
-# Why do we need tests?
+## Why do we need tests?
 - All parties are confident
 - Freedom of choice
 
