@@ -28,6 +28,13 @@
 - You do read & write tests on daily basis
 - You want to think ahead about testability of system
 
++++
+@title[References]
+
+## Further reading
+- "The art of unit testing" by Roy Osherove
+- "Extreme programming: TDD by example" by Kent Beck
+
 ---
 @title[5 whys]
 
@@ -111,7 +118,7 @@ If we spend more time for setting up, running or required changes than on actual
 ## Readable
 If we need much time to debug a test and figure out the reason of it's failure
 
-*No one* will care about "green build"
+*No one* will care about <span style="color: green; font-weight: bold">green build</span>
 
 
 ---
@@ -119,18 +126,20 @@ If we need much time to debug a test and figure out the reason of it's failure
 
 ## Trustworthy
 
-- Do not delete or modify tests. It's better to make new tests. _Unless ..._
+- It's better to make new tests not modify existent. _Unless ..._
 - Separate unittests from integration
 - Get rid of brittle tests
 - Which values to check? Those which are real
 - Build tests with no logic (`if`, `for`)
 - Know difference between Whitebox vs Blackbox
-- Coverage means something only if you trust your tests
+- Trust coverage only if you trust your tests
 
 +++
 @title[Trustworthy: Logic is bad for you]
 
-## Logic
+### Logic
+
+Why this test isn't trustworthy?
 
 ```
 def foobar(x, y):
@@ -144,7 +153,9 @@ def test_foobar__replay_logic__ok():
 +++
 @title[Trustworthy: Randoms often doesn't help]
 
-## Logic
+### Random logic
+
+Why this change don't make things better?
 
 ```
 def foobar(x, y):
@@ -159,7 +170,9 @@ def test_foobar__replay_logic__ok():
 +++
 @title[Trustworthy: Blackbox]
 
-## Blackbox
+### Blackbox
+
+Check system's output with known input often quite simple
 
 ```
 def calc_sum(x, y):
@@ -174,7 +187,9 @@ def test_sum__positive_numbers__ok():
 +++
 @title[Trustworthy: Whitebox]
 
-## Whitebox
+### Whitebox
+
+Check internals often lead to brittle tests
 
 ```
 def sum(x, y):
@@ -191,7 +206,9 @@ def test_sum__positive_numbers__ok():
 +++
 @title[Trustworthy: What the coverage means?]
 
-## "Good coverage"
+### "Good coverage"
+
+Why this test isn't trustworthy?
 
 ```
 def foobar(x, y):
@@ -217,7 +234,9 @@ def test_foobar__good_coverage__ok():
 +++
 @title[Maintainable: Helpers]
 
-## Helpers
+### Use helpers, Luke
+
+Be a lazy developer
 
 ```
 def test_foobar__app_failed__error():
@@ -232,7 +251,9 @@ def test_foobar__app_failed__error():
 +++
 @title[Maintainable: Atomic]
 
-## Atomic
+### Not so atomic test
+
+Why this test poorly maintainable?
 
 ```
 def foobar(x, y):
@@ -248,7 +269,9 @@ def test_foobaz__atomic__ok():
 +++
 @title[Maintainable: Atomic]
 
-## Atomic
+### Atomic test
+
+Check only one aspect of work at once
 
 ```
 def foobar(x, y):
@@ -263,7 +286,9 @@ def test_foobaz__atomic__ok():
 +++
 @title[Maintainable: Many assertions]
 
-## Many assertions
+### Many assertions
+
+Don't be a lazy developer
 
 ```
 def foobar(x, y):
@@ -279,7 +304,9 @@ def test_foobar__all_options__ok():
 +++
 @title[Maintainable: Less assertions]
 
-## Less assertions
+### Less assertions
+
+Make it simple & clear
 
 ```
 def foobar(x, y):
@@ -309,7 +336,9 @@ def test_foobar__negative_second__ok():
 +++
 @title[Readable: Clear name]
 
-## Not so clear name
+### Not so clear name
+
+It's the very first thing which will see a developer
 
 ```
 def foobar(x, y):
@@ -325,7 +354,11 @@ def test_foobar_failed():
 +++
 @title[Readable: Better name]
 
-## Better name
+### Better name
+
+Gives more clues what's broken.
+Do not fear to use really long names.
+Remember that you write that for a human at the first place
 
 ```
 def foobar(x, y):
@@ -339,7 +372,9 @@ def test_foobar__positive_numbers__ok():
 +++
 @title[Readable: Not so clear steps]
 
-## Steps
+### Not so clear steps
+
+What's mocked here? Gimme answer in 5 seconds!
 
 ```
 def test_foobar__false_result__ok():
@@ -353,7 +388,9 @@ def test_foobar__false_result__ok():
 +++
 @title[Readable: Clear steps]
 
-## Clear steps
+### Clear steps
+
+Save your time
 
 ```
 def test_foobar__false_result__ok():
@@ -367,7 +404,11 @@ def test_foobar__false_result__ok():
 +++
 @title[Readable: Magic]
 
-## Magic
+### Magic
+
+No one can understand that.
+Only one person can debug it.
+This person can't afford vacations
 
 ```
 def test_foobar__watch_my_magic__ok():
@@ -378,7 +419,9 @@ _todo_ qr-code to backbone test
 +++
 @title[Readable: Less magic]
 
-## Less magic
+### Less magic
+
+Make it "like well-written prose". Readers want to know _why?_ not _how?_
 
 ```
 def foobar(x, y):
@@ -395,7 +438,9 @@ def test_foobar__error_code__ok():
 +++
 @title[Readable: Noise]
 
-## Noise
+## Reduce the noise
+
+Delete meaningless lines. Burn the dead code with fire
 
 ```
 def foobar(x, y):
@@ -404,24 +449,20 @@ def foobar(x, y):
     return '%s,%s' % (x, y)
 
 def test_foobar__commented_assert__ok():
-    assert foobar(1,-1) == 42
     # assert foobar(-1,-1) == 43
+    assert foobar(1,-1) == 42
 ```
 
 ---
 @title[Thank you]
 
-## T[h]ank you!
+## Thank you!
 
-@inesusvet
+Spread the word
+gitpitch.com/inesusvet/tests-talk
 
-fb.com/ivan.nesusvet
+*BTW* we are hiring
 
 ivan.styazhkin@datarobot.com
 
-+++
-@title[References]
-
-## Further reading
-- "The art of unit testing" by Roy Osherove
-- "Extreme programming: TDD by example" by Kent Beck
+fb.com/ivan.nesusvet
