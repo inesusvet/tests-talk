@@ -128,13 +128,13 @@ If we need much time to debug a test and figure out the reason of it's failure
 - Coverage means something only if you trust your tests
 
 +++
+@title[Trustworthy: Logic is bad for you]
 
 ## Logic
 
 ```
 def foobar(x, y):
     return '%s,%s' % (x, y)
-
 
 def test_foobar__replay_logic__ok():
     result = foobar(1, 2)
@@ -142,13 +142,13 @@ def test_foobar__replay_logic__ok():
 ```
 
 +++
+@title[Trustworthy: Randoms often doesn't help]
 
 ## Logic
 
 ```
 def foobar(x, y):
     return '%s,%s' % (x, y)
-
 
 def test_foobar__replay_logic__ok():
     x, y = randint(0, 10), randint(0, 10)
@@ -157,6 +157,7 @@ def test_foobar__replay_logic__ok():
 ```
 
 +++
+@title[Trustworthy: Blackbox]
 
 ## Blackbox
 
@@ -166,19 +167,18 @@ def calc_sum(x, y):
     logger.debug(‘%s + %s’, x, y)
     return calc.sum(int(x), float(y))
 
-
 def test_sum__positive_numbers__ok():
     assert calc_sum(1, 2) == 3
 ```
 
 +++
+@title[Trustworthy: Whitebox]
 
 ## Whitebox
 
 ```
 def sum(x, y):
     ...
-
 
 def test_sum__positive_numbers__ok():
     assert sum(1, 2) == 3
@@ -189,6 +189,7 @@ def test_sum__positive_numbers__ok():
 ```
 
 +++
+@title[Trustworthy: What the coverage means?]
 
 ## "Good coverage"
 
@@ -196,12 +197,102 @@ def test_sum__positive_numbers__ok():
 def foobar(x, y):
     return '%s,%s' % (x, y)
 
-
 def test_foobar__good_coverage__ok():
     assert foobar(1, 2)
 ```
 
 ---
+@title[Maintainable]
+
+## Maintainable
+
+- Do stateless tests. Start with a blank page _each time_
+- Don't do cross-dependencies, any caches and _magic_
+- Don't do cross-calls of test from the other test
+- Isolate things accurately (stub vs mock)
+- Test different layers of abstractions separately
+- Build your helpers. Treat tests code as the production one
+- Do atomic tests. One test - one assertion
+
++++
+@title[Maintainable: Helpers]
+
+## Helpers
+
+```
+def test_foobar__app_failed__error():
+    message = ‘not good’
+    setup_error(message)
+
+    response = foobar(1, 2)
+
+    assert_error(response, message)
+```
+
++++
+@title[Maintainable: Atomic]
+
+## Atomic
+
+```
+def foobar(x, y):
+    return requests.post(
+        ‘/foo’, data={‘x’: x, ‘y’: y})
+
+def test_foobaz__atomic__ok():
+    resp = foobar(1, 2)
+    assert resp.status_code == 200
+    assert db_mock.query().count() == 1
+```
+
++++
+@title[Maintainable: Atomic]
+
+## Atomic
+
+```
+def foobar(x, y):
+    return requests.post(
+        ‘/foo’, data={‘x’: x, ‘y’: y})
+
+def test_foobaz__atomic__ok():
+    resp = foobar(1, 2)
+    assert_post(resp, expected_body={'x': 1, 'y': 2})
+```
+
++++
+@title[Maintainable: Many assertions]
+
+## Many assertions
+
+```
+def foobar(x, y):
+    return 42 if y > 0 else '%s,%s' % (
+       x, y,
+    )
+
+def test_foobar__all_options__ok():
+    assert foobar(1, -1) == 42
+    assert foobar(-1, 1) == '1,-1'
+```
+
++++
+@title[Maintainable: Less assertions]
+
+## Less assertions
+
+```
+def foobar(x, y):
+    return 42 if y > 0 else '%s,%s' % (
+       x, y,
+    )
+
+def test_foobar__negative_first__ok():
+    assert foobar(-1, 1) == '1,-1'
+
+def test_foobar__negative_second__ok():
+    assert foobar(1, -1) == 42
+```
 
 ---
 @title[Thank you]
