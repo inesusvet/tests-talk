@@ -417,7 +417,7 @@ def test_foobar__watch_my_magic__ok():
 
 Example from backbone.js
 
-![qr-code to backbone test](https://github.com/inesusvet/tests-talk/raw/master/assets/bb-test.png)
+![qr-code](https://github.com/inesusvet/tests-talk/raw/master/assets/bb-test.png)
 
 +++
 @title[Readable: Less magic]
@@ -462,10 +462,10 @@ def test_foobar__commented_assert__ok():
 ## Thank you!
 
 Spread the word
-gitpitch.com/inesusvet/tests-talk
-
-*BTW* we are hiring
+`gitpitch.com/inesusvet/tests-talk`
 
 ivan.styazhkin@datarobot.com
 
 fb.com/ivan.nesusvet
+
+**BTW** DataRobot is hiring people right now
