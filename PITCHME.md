@@ -211,7 +211,7 @@ def test_foobar__good_coverage__ok():
 - Don't do cross-calls of test from the other test
 - Isolate things accurately (stub vs mock)
 - Test different layers of abstractions separately
-- Build your helpers. Treat tests code as the production one
+- Build your helpers
 - Do atomic tests. One test - one assertion
 
 +++
@@ -295,6 +295,120 @@ def test_foobar__negative_second__ok():
 ```
 
 ---
+@title[Readable]
+
+## Readable
+
+- Clear name of test: Given, What, Expected. Make it descriptive
+- Clear steps of test: Create, Configure, Act, Assert
+- Don't do magic. Make it as simple as you can.
+- Eliminate _broken windows_
+- Treat tests code as the production one - with love
+- Do review and refactoring of test code
+
++++
+@title[Readable: Clear name]
+
+## Not so clear name
+
+```
+def foobar(x, y):
+    return '%s,%s' % (x, y)
+
+def test_foobar1():
+    ...
+
+def test_foobar_failed():
+    ...
+```
+
++++
+@title[Readable: Better name]
+
+## Better name
+
+```
+def foobar(x, y):
+    return '%s,%s' % (x, y)
+
+def test_foobar__positive_numbers__ok():
+    small, big = 1, 100
+    assert foobar(small, big) == '1,100'
+```
+
++++
+@title[Readable: Not so clear steps]
+
+## Steps
+
+```
+def test_foobar__false_result__ok():
+    request = Request.from_dict({‘status’: 200,
+                                 ‘body’: ‘{“error”:”failed”}’})
+    assert request.is_ok == True
+    patch(‘foobar.is_on’, False).start()
+    assert foobar(request, 1, 2) == ‘0,0’
+```
+
++++
+@title[Readable: Clear steps]
+
+## Clear steps
+
+```
+def test_foobar__false_result__ok():
+    setup_foobar_ok(‘failed’)
+
+    response = foobar(‘lool’)
+
+    assert response is None
+```
+
++++
+@title[Readable: Magic]
+
+## Magic
+
+```
+def test_foobar__watch_my_magic__ok():
+    assert foobar(42) == ‘3,141529'
+```
+_todo_ qr-code to backbone test
+
++++
+@title[Readable: Less magic]
+
+## Less magic
+
+```
+def foobar(x, y):
+    if y < 0:
+        return 42
+    return '%s,%s' % (x, y)
+
+def test_foobar__error_code__ok():
+    uid, bad_id, err_code = 1, -1, 42
+    result = foobar(uid, bad_id)
+    assert result == err_code
+```
+
++++
+@title[Readable: Noise]
+
+## Noise
+
+```
+def foobar(x, y):
+    if y < 0:
+        return 42
+    return '%s,%s' % (x, y)
+
+def test_foobar__commented_assert__ok():
+    assert foobar(1,-1) == 42
+    # assert foobar(-1,-1) == 43
+```
+
+---
 @title[Thank you]
 
 ## T[h]ank you!
@@ -309,5 +423,5 @@ ivan.styazhkin@datarobot.com
 @title[References]
 
 ## Further reading
-- "The art of unit testing" by Roy Oserove
-- "TDD by example" by Kent Beck
+- "The art of unit testing" by Roy Osherove
+- "Extreme programming: TDD by example" by Kent Beck
