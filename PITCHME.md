@@ -113,6 +113,96 @@ If we need much time to debug a test and figure out the reason of it's failure
 
 *No one* will care about "green build"
 
+
+---
+@title[Trustworthy]
+
+## Trustworthy
+
+- Do not delete or modify tests. It's better to make new tests. _Unless ..._
+- Separate unittests from integration
+- Get rid of brittle tests
+- Which values to check? Those which are real
+- Build tests with no logic (`if`, `for`)
+- Know difference between Whitebox vs Blackbox
+- Coverage means something only if you trust your tests
+
++++
+
+## Logic
+
+```
+def foobar(x, y):
+    return '%s,%s' % (x, y)
+
+
+def test_foobar__replay_logic__ok():
+    result = foobar(1, 2)
+    assert result == '%s,%s' % (1, 2)
+```
+
++++
+
+## Logic
+
+```
+def foobar(x, y):
+    return '%s,%s' % (x, y)
+
+
+def test_foobar__replay_logic__ok():
+    x, y = randint(0, 10), randint(0, 10)
+    result = foobar(x, y)
+    assert result == '%s,%s' % (x, y)
+```
+
++++
+
+## Blackbox
+
+```
+def calc_sum(x, y):
+    calc = Calculator(randint(0, 100))
+    logger.debug(‘%s + %s’, x, y)
+    return calc.sum(int(x), float(y))
+
+
+def test_sum__positive_numbers__ok():
+    assert calc_sum(1, 2) == 3
+```
+
++++
+
+## Whitebox
+
+```
+def sum(x, y):
+    ...
+
+
+def test_sum__positive_numbers__ok():
+    assert sum(1, 2) == 3
+    assert logger_mock.called_with(
+        ‘%s + %s’, 1, 2
+    )
+    assert calculator_mock.called(...)
+```
+
++++
+
+## "Good coverage"
+
+```
+def foobar(x, y):
+    return '%s,%s' % (x, y)
+
+
+def test_foobar__good_coverage__ok():
+    assert foobar(1, 2)
+```
+
+---
+
 ---
 @title[Thank you]
 
