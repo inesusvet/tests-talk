@@ -126,7 +126,7 @@ If we need much time to debug a test and figure out the reason of it's failure
 
 ## Trustworthy
 
-- It's better to make new tests not modify existent. _Unless ..._
+- It's better to make new tests. Not modify existent
 - Separate unittests from integration
 - Get rid of brittle tests
 - Which values to check? Those which are real
