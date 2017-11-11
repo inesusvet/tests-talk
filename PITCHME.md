@@ -414,7 +414,8 @@ This person can't afford vacations
 def test_foobar__watch_my_magic__ok():
     assert foobar(42) == ‘3,141529'
 ```
-_todo_ qr-code to backbone test
+
+Example ![qr-code to backbone test](assets/bb-test.png)
 
 +++
 @title[Readable: Less magic]
@@ -438,7 +439,7 @@ def test_foobar__error_code__ok():
 +++
 @title[Readable: Noise]
 
-## Reduce the noise
+### Reduce the noise
 
 Delete meaningless lines. Burn the dead code with fire
 
