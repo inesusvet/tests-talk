@@ -415,7 +415,9 @@ def test_foobar__watch_my_magic__ok():
     assert foobar(42) == ‘3,141529'
 ```
 
-Example ![qr-code to backbone test](https://github.com/inesusvet/tests-talk/raw/master/assets/bb-test.png)
+Example from backbone.js
+
+![qr-code to backbone test](https://github.com/inesusvet/tests-talk/raw/master/assets/bb-test.png)
 
 +++
 @title[Readable: Less magic]
