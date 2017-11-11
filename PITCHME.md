@@ -128,10 +128,10 @@ If we need much time to debug a test and figure out the reason of it's failure
 
 - It's better to make new tests. Not modify existent
 - Separate unittests from integration
-- Get rid of brittle tests
+- Get rid of _brittle_ tests
 - Which values to check? Those which are real
 - Build tests with no logic (`if`, `for`)
-- Know difference between Whitebox vs Blackbox
+- Know difference between *Whitebox* vs *Blackbox*
 - Trust coverage only if you trust your tests
 
 +++
@@ -415,7 +415,7 @@ def test_foobar__watch_my_magic__ok():
     assert foobar(42) == ‘3,141529'
 ```
 
-Example ![qr-code to backbone test](assets/bb-test.png)
+Example ![qr-code to backbone test](tests-talk/assets/bb-test.png)
 
 +++
 @title[Readable: Less magic]
