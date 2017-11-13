@@ -159,6 +159,8 @@ def test_build_cookie__random_logic__ok():
     assert result == '%s=%s' % (name, value)
 ```
 
+It is not a _fuzzy testing_. It's brittle test
+
 +++
 @title[Trustworthy: Blackbox]
 
