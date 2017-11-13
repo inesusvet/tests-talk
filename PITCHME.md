@@ -181,6 +181,8 @@ def test_check_phone__regular_user__ok():
     assert validate_new_phone(uid, '+79998005475') is True
 ```
 
+Even if system isn't simple
+
 +++
 @title[Trustworthy: Whitebox]
 
