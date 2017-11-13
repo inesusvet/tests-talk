@@ -203,7 +203,8 @@ def test_check_phone__regular_user__ok():
 
     assert validate_new_phone(uid, phone_number) is True
     assert blackbox_mock.called_with(
-        method='GET', uid=uid, body={'phone_number': phone_number},
+        method='GET', uid=uid, body={
+            'phone_number': phone_number},
     )
 ```
 
