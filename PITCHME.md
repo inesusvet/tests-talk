@@ -45,8 +45,9 @@
 
 ## To have
 - Less errors
-- Easier maintenance
+- Easier to maintain (bring new changes)
 - Easier to understand/reason about the code
+- Easier to communicate about new changes
 - Easier to develop new features
 
 +++
