@@ -1,6 +1,7 @@
 @title[Introduction]
 ## The test which will save your day
 ##### by Ivan Styazhkin from DataRobot
+`gitpitch.com/inesusvet/tests-talk`
 
 +++
 @title[Disclaimer]
@@ -123,19 +124,6 @@ If we need much time to debug a test and figure out the reason of it's failure
 
 
 ---
-@title[Trustworthy]
-
-## Trustworthy
-
-- It's better to make new tests. Not modify existent
-- Separate unittests from integration
-- Get rid of _brittle_ tests
-- Which values to check? Those which are real
-- Build tests with no logic (`if`, `for`)
-- Know difference between *Whitebox* vs *Blackbox*
-- Trust coverage only if you trust your tests
-
-+++
 @title[Trustworthy: Logic is bad for you]
 
 ### Logic
@@ -219,20 +207,20 @@ def test_foobar__good_coverage__ok():
     assert foobar(1, 2)
 ```
 
----
-@title[Maintainable]
-
-## Maintainable
-
-- Do stateless tests. Start with a blank page _each time_
-- Don't do cross-dependencies, any caches and _magic_
-- Don't do cross-calls of test from the other test
-- Isolate things accurately (stub vs mock)
-- Test different layers of abstractions separately
-- Build your helpers
-- Do atomic tests. One test - one assertion
-
 +++
+@title[Trustworthy]
+
+## Trustworthy
+
+- It's better to make new tests. Not modify existent
+- Separate unittests from integration
+- Get rid of _brittle_ tests
+- Which values to check? Those which are real
+- Build tests with no logic (`if`, `for`)
+- Know difference between *Whitebox* vs *Blackbox*
+- Trust coverage only if you trust your tests
+
+---
 @title[Maintainable: Helpers]
 
 ### Use helpers, Luke
@@ -322,19 +310,20 @@ def test_foobar__negative_second__ok():
     assert foobar(1, -1) == 42
 ```
 
----
-@title[Readable]
-
-## Readable
-
-- Clear name of test: Given, What, Expected. Make it descriptive
-- Clear steps of test: Create, Configure, Act, Assert
-- Don't do magic. Make it as simple as you can.
-- Eliminate _broken windows_
-- Treat tests code as the production one - with love
-- Do review and refactoring of test code
-
 +++
+@title[Maintainable]
+
+## Maintainable
+
+- Do stateless tests. Start with a blank page _each time_
+- Don't do cross-dependencies, any caches and _magic_
+- Don't do cross-calls of test from the other test
+- Isolate things accurately (stub vs mock)
+- Test different layers of abstractions separately
+- Build your helpers
+- Do atomic tests. One test - one assertion
+
+---
 @title[Readable: Clear name]
 
 ### Not so clear name
@@ -457,6 +446,18 @@ def test_foobar__commented_assert__ok():
     assert foobar(1,-1) == 42
 ```
 
++++
+@title[Readable]
+
+## Readable
+
+- Clear name of test: Given, What, Expected. Make it descriptive
+- Clear steps of test: Create, Configure, Act, Assert
+- Don't do magic. Make it as simple as you can.
+- Eliminate _broken windows_
+- Treat tests code as the production one - with love
+- Do review and refactoring of test code
+
 ---
 @title[Thank you]
 
@@ -468,5 +469,3 @@ Spread the word
 ivan.styazhkin@datarobot.com
 
 fb.com/ivan.nesusvet
-
-**BTW** DataRobot is hiring people right now
