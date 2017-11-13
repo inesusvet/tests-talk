@@ -131,12 +131,12 @@ If we need much time to debug a test and figure out the reason of it's failure
 Why this test isn't trustworthy?
 
 ```
-def foobar(x, y):
-    return '%s,%s' % (x, y)
+def build_cookie(name, value):
+    return '%s=%s' % (name, value)
 
-def test_foobar__replay_logic__ok():
-    result = foobar(1, 2)
-    assert result == '%s,%s' % (1, 2)
+def test_build_cookie__replay_logic__ok():
+    result = build_cookie('uid', 123456)
+    assert result == '%s=%s' % ('uid', 123456)
 ```
 
 +++
@@ -147,13 +147,16 @@ def test_foobar__replay_logic__ok():
 Why this change don't make things better?
 
 ```
-def foobar(x, y):
-    return '%s,%s' % (x, y)
+from random import randint, sample
+from string import ascii_letters
 
-def test_foobar__replay_logic__ok():
-    x, y = randint(0, 10), randint(0, 10)
-    result = foobar(x, y)
-    assert result == '%s,%s' % (x, y)
+def build_cookie(name, value):
+    return '%s=%s' % (name, value)
+
+def test_build_cookie__random_logic__ok():
+    name, value = sample(ascii_letters, 10), randint(0, 10)
+    result = build_cookie(name, value)
+    assert result == '%s=%s' % (name, value)
 ```
 
 +++
@@ -164,13 +167,16 @@ def test_foobar__replay_logic__ok():
 Check system's output with known input often quite simple
 
 ```
-def calc_sum(x, y):
-    calc = Calculator(randint(0, 100))
-    logger.debug(‘%s + %s’, x, y)
-    return calc.sum(int(x), float(y))
+def validate_new_phone(user_id, new_phone):
+    if not re.match(RE_VALID_PHONE_NUMBER_FORMAT, new_phone):
+        return False
+    return Blackbox.validate_phone_number(user_id, new_phone)
 
-def test_sum__positive_numbers__ok():
-    assert calc_sum(1, 2) == 3
+def test_check_phone__regular_user__ok():
+    uid = 1
+    setup_user(uid)
+
+    assert validate_new_phone(uid, '+79998005475') is True
 ```
 
 +++
@@ -181,15 +187,20 @@ def test_sum__positive_numbers__ok():
 Check internals often lead to brittle tests
 
 ```
-def sum(x, y):
-    ...
+def validate_new_phone(user_id, new_phone):
+    if not re.match(RE_VALID_PHONE_NUMBER_FORMAT, new_phone):
+        return False
+    return Blackbox.validate_phone_number(user_id, new_phone)
 
-def test_sum__positive_numbers__ok():
-    assert sum(1, 2) == 3
-    assert logger_mock.called_with(
-        ‘%s + %s’, 1, 2
+def test_check_phone__regular_user__ok():
+    uid, phone_number = 1, '+79998005475'
+    setup_user(uid)
+    blackbox_mock = setup_blackbox_mock()
+
+    assert validate_new_phone(uid, phone_number) is True
+    assert blackbox_mock.called_with(
+        method='GET', uid=uid, body={'phone_number': phone_number},
     )
-    assert calculator_mock.called(...)
 ```
 
 +++
@@ -200,11 +211,11 @@ def test_sum__positive_numbers__ok():
 Why this test isn't trustworthy?
 
 ```
-def foobar(x, y):
-    return '%s,%s' % (x, y)
+def get_full_username(first_name, last_name):
+    return '%s %s' % (first_name, last_name)
 
-def test_foobar__good_coverage__ok():
-    assert foobar(1, 2)
+def test_get_full_username__good_coverage__ok():
+    assert get_full_username('Snoop', 'Dogg')
 ```
 
 +++
