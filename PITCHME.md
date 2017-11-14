@@ -1,12 +1,12 @@
 @title[Introduction]
 
-# The test which will save your day
+## The test which will save your day
 
 ##### by Ivan Styazhkin from DataRobot
 
 `gitpitch.com/inesusvet/tests-talk`
 
-+++
+---
 @title[Disclaimer]
 
 ## I am not selling
