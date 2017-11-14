@@ -339,16 +339,16 @@ def test_build_session_cookie__check_all_options__ok():
 Make it simple & clear
 
 ```
-def foobar(x, y):
-    return 42 if y > 0 else '%s,%s' % (
-       x, y,
+def validate_sessionid(username, value):
+    return 42 if value < 0 else (
+       hash(username) == value
     )
 
-def test_foobar__negative_first__ok():
-    assert foobar(-1, 1) == '1,-1'
+def test_validate_sessionid__negative_session__special_value():
+    assert validate_sessionid('admin', -1) == 42
 
-def test_foobar__negative_second__ok():
-    assert foobar(1, -1) == 42
+def test_foobar__positive_valid_session__ok():
+    assert validate_sessionid('user', 6468734353329665493) == True
 ```
 
 +++
