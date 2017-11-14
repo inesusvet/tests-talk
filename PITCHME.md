@@ -158,7 +158,7 @@ def build_cookie(name, value):
 
 def test_build_cookie__regular_name_valid_value__ok():
     name, valid_session = 'sessionid', 1001
-    assert build_cookie(small, big) == 'sessionid=1001'
+    assert build_cookie(name, valid_session) == 'sessionid=1001'
 ```
 
 +++
