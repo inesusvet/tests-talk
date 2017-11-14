@@ -4,9 +4,7 @@
 
 #### by Ivan Styazhkin @ DataRobot
 
-`gitpitch.com/inesusvet/tests-talk`
-
----
++++
 @title[Disclaimer]
 
 ## I am not selling
