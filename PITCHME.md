@@ -132,8 +132,8 @@ If we need much time to debug a test and figure out the reason of it's failure
 It's the very first thing which will see a developer
 
 ```
-def foobar(x, y):
-    return '%s,%s' % (x, y)
+def build_cookie(name, value):
+    return '%s=%s' % (name, value)
 
 def test_foobar1():
     ...
@@ -152,12 +152,12 @@ Do not fear to use really long names.
 Remember that you write that for a human at the first place
 
 ```
-def foobar(x, y):
-    return '%s,%s' % (x, y)
+def build_cookie(name, value):
+    return '%s=%s' % (name, value)
 
-def test_foobar__positive_numbers__ok():
-    small, big = 1, 100
-    assert foobar(small, big) == '1,100'
+def test_build_cookie__regular_name_valid_value__ok():
+    name, valid_session = 'sessionid', 1001
+    assert build_cookie(small, big) == 'sessionid=1001'
 ```
 
 +++
