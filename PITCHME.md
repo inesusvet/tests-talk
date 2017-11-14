@@ -224,9 +224,9 @@ def foobar(x, y):
         return 42
     return '%s,%s' % (x, y)
 
-def test_foobar__error_code__ok():
-    uid, bad_id, err_code = 1, -1, 42
-    result = foobar(uid, bad_id)
+def test_authorize__bad_session_id_for_a_user__error():
+    uid, bad_session, err_code = 1, -1, 42
+    result = authorize(uid, bad_session)
     assert result == err_code
 ```
 
