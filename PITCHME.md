@@ -124,225 +124,6 @@ If we need much time to debug a test and figure out the reason of it's failure
 
 *No one* will care about <span style="color: green; font-weight: bold">green build</span>
 
-
----
-@title[Trustworthy: Logic is bad for you]
-
-### Logic
-
-Why this test isn't trustworthy?
-
-```
-def build_cookie(name, value):
-    return '%s=%s' % (name, value)
-
-def test_build_cookie__replay_logic__ok():
-    result = build_cookie('uid', 123456)
-    assert result == '%s=%s' % ('uid', 123456)
-```
-
-+++
-@title[Trustworthy: Randoms often doesn't help]
-
-### Random logic
-
-Why this change don't make things better?
-
-```
-from random import randint, sample
-from string import ascii_letters
-
-def build_cookie(name, value):
-    return '%s=%s' % (name, value)
-
-def test_build_cookie__random_logic__ok():
-    name, value = sample(ascii_letters, 10), randint(0, 10)
-    result = build_cookie(name, value)
-    assert result == '%s=%s' % (name, value)
-```
-
-It is not a _fuzzy testing_. It's brittle test
-
-+++
-@title[Trustworthy: Blackbox]
-
-### Blackbox
-
-Check system's output with known input often quite simple
-
-```
-def validate_new_phone(user_id, new_phone):
-    if not re.match(RE_VALID_PHONE_NUMBER_FORMAT, new_phone):
-        return False
-    return Blackbox.validate_phone_number(user_id, new_phone)
-
-def test_check_phone__regular_user__ok():
-    uid = 1
-    setup_user(uid)
-
-    assert validate_new_phone(uid, '+79998005475') is True
-```
-
-Even if system isn't simple
-
-+++
-@title[Trustworthy: Whitebox]
-
-### Whitebox
-
-Check internals often lead to brittle tests
-
-```
-def validate_new_phone(user_id, new_phone):
-    if not re.match(RE_VALID_PHONE_NUMBER_FORMAT, new_phone):
-        return False
-    return Blackbox.validate_phone_number(user_id, new_phone)
-
-def test_check_phone__regular_user__ok():
-    uid, phone_number = 1, '+79998005475'
-    setup_user(uid)
-    blackbox_mock = setup_blackbox_mock()
-
-    assert validate_new_phone(uid, phone_number) is True
-    assert blackbox_mock.called_with(
-        method='GET', uid=uid, body={
-            'phone_number': phone_number},
-    )
-```
-
-+++
-@title[Trustworthy: What the coverage means?]
-
-### "Good coverage"
-
-Why this test isn't trustworthy?
-
-```
-def get_full_username(first_name, last_name):
-    return '%s %s' % (first_name, last_name)
-
-def test_get_full_username__good_coverage__ok():
-    assert get_full_username('Snoop', 'Dogg')
-```
-
-+++
-@title[Trustworthy]
-
-## Trustworthy
-
-- It's better to make new tests. Not modify existent
-- Separate unittests from integration
-- Get rid of _brittle_ tests
-- Which values to check? Those which are real
-- Build tests with no logic (`if`, `for`)
-- Know difference between *Whitebox* vs *Blackbox*
-- Trust coverage only if you trust your tests
-
----
-@title[Maintainable: Helpers]
-
-### Use helpers, Luke
-
-Be a lazy developer
-
-```
-def test_auth__app_failed__error():
-    message = ‘not good’
-    setup_error(message)
-
-    response = authorize('username', 'badpassword')
-
-    assert_error(response, message)
-```
-
-+++
-@title[Maintainable: Atomic]
-
-### Not so atomic test
-
-Why this test poorly maintainable?
-
-```
-def geo_proxy(x, y):
-    return requests.post(
-        ‘/geo’, data={‘x’: x, ‘y’: y})
-
-def test_geo_proxy__not_atomic__ok(requests_mock, db_mock):
-    resp = geo_proxy(1, 2)
-
-    requests_mock.post.assert_called_once_with(
-        '/geo', data={'x': 1, 'y': 2})
-    assert db_mock.query.call_count == 1
-```
-
-+++
-@title[Maintainable: Atomic]
-
-### Atomic test
-
-Check only one aspect of work at once
-
-```
-def geo_proxy(x, y):
-    return requests.post(
-        ‘/geo’, data={‘x’: x, ‘y’: y})
-
-def test_geo_proxy__atomic__ok(requests_mock):
-    resp = geo_proxy(1, 2)
-
-    requests_mock.post.assert_called_once_with(
-        '/geo', data={'x': 1, 'y': 2})
-```
-
-+++
-@title[Maintainable: Many assertions]
-
-### Many assertions
-
-Don't be a lazy developer
-
-```
-def build_session_cookie(x, y):
-    return 42 if y > 0 else '%s=%s' % (x, y)
-
-def test_build_session_cookie__check_all_options__ok():
-    assert build_session_cookie('uid', 1) == 42
-    assert build_session_cookie('foo', -1) == 'foo=-1'
-```
-
-+++
-@title[Maintainable: Less assertions]
-
-### Less assertions
-
-Make it simple & clear
-
-```
-def foobar(x, y):
-    return 42 if y > 0 else '%s,%s' % (
-       x, y,
-    )
-
-def test_foobar__negative_first__ok():
-    assert foobar(-1, 1) == '1,-1'
-
-def test_foobar__negative_second__ok():
-    assert foobar(1, -1) == 42
-```
-
-+++
-@title[Maintainable]
-
-## Maintainable
-
-- Do stateless tests. Start with a blank page _each time_
-- Don't do cross-dependencies, any caches and _magic_
-- Don't do cross-calls of test from the other test
-- Isolate things accurately (stub vs mock)
-- Test different layers of abstractions separately
-- Build your helpers
-- Do atomic tests. One test - one assertion
-
 ---
 @title[Readable: Clear name]
 
@@ -477,6 +258,224 @@ def test_foobar__commented_assert__ok():
 - Eliminate _broken windows_
 - Treat tests code as the production one - with love
 - Do review and refactoring of test code
+
+---
+@title[Maintainable: Helpers]
+
+### Use helpers, Luke
+
+Be a lazy developer
+
+```
+def test_auth__app_failed__error():
+    message = ‘not good’
+    setup_error(message)
+
+    response = authorize('username', 'badpassword')
+
+    assert_error(response, message)
+```
+
++++
+@title[Maintainable: Atomic]
+
+### Not so atomic test
+
+Why this test poorly maintainable?
+
+```
+def geo_proxy(x, y):
+    return requests.post(
+        ‘/geo’, data={‘x’: x, ‘y’: y})
+
+def test_geo_proxy__not_atomic__ok(requests_mock, db_mock):
+    resp = geo_proxy(1, 2)
+
+    requests_mock.post.assert_called_once_with(
+        '/geo', data={'x': 1, 'y': 2})
+    assert db_mock.query.call_count == 1
+```
+
++++
+@title[Maintainable: Atomic]
+
+### Atomic test
+
+Check only one aspect of work at once
+
+```
+def geo_proxy(x, y):
+    return requests.post(
+        ‘/geo’, data={‘x’: x, ‘y’: y})
+
+def test_geo_proxy__atomic__ok(requests_mock):
+    resp = geo_proxy(1, 2)
+
+    requests_mock.post.assert_called_once_with(
+        '/geo', data={'x': 1, 'y': 2})
+```
+
++++
+@title[Maintainable: Many assertions]
+
+### Many assertions
+
+Don't be a lazy developer
+
+```
+def build_session_cookie(x, y):
+    return 42 if y > 0 else '%s=%s' % (x, y)
+
+def test_build_session_cookie__check_all_options__ok():
+    assert build_session_cookie('uid', 1) == 42
+    assert build_session_cookie('foo', -1) == 'foo=-1'
+```
+
++++
+@title[Maintainable: Less assertions]
+
+### Less assertions
+
+Make it simple & clear
+
+```
+def foobar(x, y):
+    return 42 if y > 0 else '%s,%s' % (
+       x, y,
+    )
+
+def test_foobar__negative_first__ok():
+    assert foobar(-1, 1) == '1,-1'
+
+def test_foobar__negative_second__ok():
+    assert foobar(1, -1) == 42
+```
+
++++
+@title[Maintainable]
+
+## Maintainable
+
+- Do stateless tests. Start with a blank page _each time_
+- Don't do cross-dependencies, any caches and _magic_
+- Don't do cross-calls of test from the other test
+- Isolate things accurately (stub vs mock)
+- Test different layers of abstractions separately
+- Build your helpers
+- Do atomic tests. One test - one assertion
+
+---
+@title[Trustworthy: Logic is bad for you]
+
+### Logic
+
+Why this test isn't trustworthy?
+
+```
+def build_cookie(name, value):
+    return '%s=%s' % (name, value)
+
+def test_build_cookie__replay_logic__ok():
+    result = build_cookie('uid', 123456)
+    assert result == '%s=%s' % ('uid', 123456)
+```
+
++++
+@title[Trustworthy: Randoms often doesn't help]
+
+### Random logic
+
+Why this change don't make things better?
+
+```
+from random import randint, sample
+from string import ascii_letters
+
+def build_cookie(name, value):
+    return '%s=%s' % (name, value)
+
+def test_build_cookie__random_logic__ok():
+    name, value = sample(ascii_letters, 10), randint(0, 10)
+    result = build_cookie(name, value)
+    assert result == '%s=%s' % (name, value)
+```
+
+It is not a _fuzzy testing_. It's brittle test
+
++++
+@title[Trustworthy: Blackbox]
+
+### Blackbox
+
+Check system's output with known input often quite simple
+
+```
+def validate_new_phone(user_id, new_phone):
+    if not re.match(RE_VALID_PHONE_NUMBER_FORMAT, new_phone):
+        return False
+    return Blackbox.validate_phone_number(user_id, new_phone)
+
+def test_check_phone__regular_user__ok():
+    uid = 1
+    setup_user(uid)
+
+    assert validate_new_phone(uid, '+79998005475') is True
+```
+
+Even if system isn't simple
+
++++
+@title[Trustworthy: Whitebox]
+
+### Whitebox
+
+Check internals often lead to brittle tests
+
+```
+def validate_new_phone(user_id, new_phone):
+    if not re.match(RE_VALID_PHONE_NUMBER_FORMAT, new_phone):
+        return False
+    return Blackbox.validate_phone_number(user_id, new_phone)
+
+def test_check_phone__regular_user__ok():
+    uid, phone_number = 1, '+79998005475'
+    setup_user(uid)
+    blackbox_mock = setup_blackbox_mock()
+
+    assert validate_new_phone(uid, phone_number) is True
+    assert blackbox_mock.called_with(
+        method='GET', uid=uid, body={
+            'phone_number': phone_number},
+    )
+```
+
++++
+@title[Trustworthy: What the coverage means?]
+
+### "Good coverage"
+
+Why this test isn't trustworthy?
+
+```
+def get_full_username(first_name, last_name):
+    return '%s %s' % (first_name, last_name)
+
+def test_get_full_username__good_coverage__ok():
+    assert get_full_username('Snoop', 'Dogg')
+```
+
++++
+@title[Trustworthy]
+
+## Trustworthy
+
+- It's better to make new tests. Not modify existent
+- Separate unittests from integration
+- Get rid of _brittle_ tests
+- Which values to check? Those which are real
+- Build tests with no logic (`if`, `for`)
+- Know difference between *Whitebox* vs *Blackbox*
+- Trust coverage only if you trust your tests
 
 ---
 @title[Thank you]
