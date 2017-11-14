@@ -135,7 +135,7 @@ It's the very first thing which will see a developer
 def build_cookie(name, value):
     return '%s=%s' % (name, value)
 
-def test_foobar1():
+def test_test():
     ...
 
 def test_foobar_failed():
