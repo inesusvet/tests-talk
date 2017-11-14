@@ -32,10 +32,11 @@
 +++
 @title[References]
 
-## Further reading
+## Further reading & watching
 - "The art of unit testing" by Roy Osherove
 - "Extreme programming: TDD by example" by Kent Beck
 - "JB Rainsberger Integrated Tests Are A Scam" @youtube
+- "Clean Code" video series by Robert C. Martin
 
 ---
 @title[5 whys]
@@ -45,8 +46,8 @@
 +++
 @title[5 because]
 
-## To have
-- Less errors
+## We need tests to
+- Have less errors
 - Easier to maintain (bring new changes)
 - Easier to understand/reason about the code
 - Easier to communicate about new changes
