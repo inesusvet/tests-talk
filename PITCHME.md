@@ -169,11 +169,11 @@ What's mocked here? Gimme answer in 5 seconds!
 
 ```
 def test_foobar__false_result__ok():
-    request = Request.from_dict({‘status’: 200,
-                                 ‘body’: ‘{“error”:”failed”}’})
-    assert request.is_ok == True
-    patch(‘foobar.is_on’, False).start()
-    assert foobar(request, 1, 2) == ‘0,0’
+    result = authorize('vasya', 'superstrongpassword')
+    assert result.is_ok == True
+    patch('requests.post').start()
+    result.send('token')
+    assert result.sessionid == ‘token’
 ```
 
 +++
@@ -184,12 +184,12 @@ def test_foobar__false_result__ok():
 Save your time
 
 ```
-def test_foobar__false_result__ok():
-    setup_foobar_ok(‘failed’)
+def test_authorize__bad_user_and_password__not_authorized():
+    setup_auth_ok(‘failed’)
 
-    response = foobar(‘lool’)
+    result = authorize('bad-user’, 'bad-password')
 
-    assert response is None
+    assert result is False
 ```
 
 +++
@@ -243,8 +243,8 @@ def foobar(x, y):
     return '%s,%s' % (x, y)
 
 def test_foobar__commented_assert__ok():
-    # assert foobar(-1,-1) == 43
-    assert foobar(1,-1) == 42
+    # assert foobar(-1, -1) == 43
+    assert foobar(1, -1) == 42
 ```
 
 +++
