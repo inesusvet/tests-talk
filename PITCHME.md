@@ -35,6 +35,7 @@
 ## Further reading
 - "The art of unit testing" by Roy Osherove
 - "Extreme programming: TDD by example" by Kent Beck
+- "JB Rainsberger Integrated Tests Are A Scam" @youtube
 
 ---
 @title[5 whys]
