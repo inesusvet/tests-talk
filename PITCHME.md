@@ -47,7 +47,7 @@
 @title[5 because]
 
 ## We need tests
-- To have less errors
+- To detect program errors faster
 - Easier to maintain (bring new changes)
 - Easier to understand/reason about the code
 - Easier to communicate about new changes
