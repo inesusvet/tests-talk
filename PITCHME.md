@@ -267,10 +267,10 @@ def geo_proxy(x, y):
     return requests.post(
         ‘/geo’, data={‘x’: x, ‘y’: y})
 
-def test_foobaz__atomic__ok(requests_mock, db_mock):
+def test_geo_proxy__not_atomic__ok(requests_mock, db_mock):
     resp = geo_proxy(1, 2)
-    
-    assert requests_mock.post.assert_called_once_with(
+
+    requests_mock.post.assert_called_once_with(
         '/geo', data={'x': 1, 'y': 2})
     assert db_mock.query.call_count == 1
 ```
@@ -283,13 +283,15 @@ def test_foobaz__atomic__ok(requests_mock, db_mock):
 Check only one aspect of work at once
 
 ```
-def foobar(x, y):
+def geo_proxy(x, y):
     return requests.post(
-        ‘/foo’, data={‘x’: x, ‘y’: y})
+        ‘/geo’, data={‘x’: x, ‘y’: y})
 
-def test_foobaz__atomic__ok():
-    resp = foobar(1, 2)
-    assert_post(resp, expected_body={'x': 1, 'y': 2})
+def test_geo_proxy__atomic__ok(requests_mock):
+    resp = geo_proxy(1, 2)
+
+    requests_mock.post.assert_called_once_with(
+        '/geo', data={'x': 1, 'y': 2})
 ```
 
 +++
