@@ -263,14 +263,16 @@ def test_auth__app_failed__error():
 Why this test poorly maintainable?
 
 ```
-def foobar(x, y):
+def geo_proxy(x, y):
     return requests.post(
-        ‘/foo’, data={‘x’: x, ‘y’: y})
+        ‘/geo’, data={‘x’: x, ‘y’: y})
 
-def test_foobaz__atomic__ok():
-    resp = foobar(1, 2)
-    assert resp.status_code == 200
-    assert db_mock.query().count() == 1
+def test_foobaz__atomic__ok(requests_mock, db_mock):
+    resp = geo_proxy(1, 2)
+    
+    assert requests_mock.post.assert_called_once_with(
+        '/geo', data={'x': 1, 'y': 2})
+    assert db_mock.query.call_count == 1
 ```
 
 +++
