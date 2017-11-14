@@ -2,7 +2,7 @@
 
 ## The test which will save your day
 
-##### by Ivan Styazhkin from DataRobot
+#### by Ivan Styazhkin @ DataRobot
 
 `gitpitch.com/inesusvet/tests-talk`
 
