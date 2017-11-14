@@ -25,7 +25,7 @@
 @title[Expectations]
 
 ## Target audience
-- You have a gut feeling that tests are good for your project
+- You know hard way that tests are good for your project
 - You do read & write tests on daily basis
 - You want to think ahead about testability of system
 
