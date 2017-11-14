@@ -204,7 +204,7 @@ This person can't afford vacations
 
 ```
 def test_foobar__watch_my_magic__ok():
-    assert foobar(42) == ‘3,141529'
+    assert foobar(42) == '3,141529'
 ```
 
 Example from backbone.js
