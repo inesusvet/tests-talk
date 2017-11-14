@@ -27,7 +27,7 @@
 ## Target audience
 - You know hard way that tests are good for your project
 - You do read & write tests on daily basis
-- You want to think ahead about testability of system
+- You will think ahead about testability of new system
 
 +++
 @title[References]
