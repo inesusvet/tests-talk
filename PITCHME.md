@@ -302,14 +302,12 @@ def test_geo_proxy__atomic__ok(requests_mock):
 Don't be a lazy developer
 
 ```
-def foobar(x, y):
-    return 42 if y > 0 else '%s,%s' % (
-       x, y,
-    )
+def build_session_cookie(x, y):
+    return 42 if y > 0 else '%s=%s' % (x, y)
 
-def test_foobar__all_options__ok():
-    assert foobar(1, -1) == 42
-    assert foobar(-1, 1) == '1,-1'
+def test_build_session_cookie__check_all_options__ok():
+    assert build_session_cookie('uid', 1) == 42
+    assert build_session_cookie('foo', -1) == 'foo=-1'
 ```
 
 +++
