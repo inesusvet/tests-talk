@@ -328,7 +328,7 @@ def build_session_cookie(x, y):
 
 def test_build_session_cookie__check_all_options__ok():
     assert build_session_cookie('uid', 1) == 42
-    assert build_session_cookie('foo', -1) == 'foo=-1'
+    assert build_session_cookie('sessionid', -1) == 'sessionid=-1'
 ```
 
 +++
