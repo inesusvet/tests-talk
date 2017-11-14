@@ -170,7 +170,7 @@ What's mocked here? Gimme answer in 5 seconds!
 ```
 def test_foobar__false_result__ok():
     result = authorize('vasya', 'superstrongpassword')
-    assert result.is_ok == True
+    assert result.is_ok
     patch('requests.post').start()
     result.send('token')
     assert result.sessionid == ‘token’
@@ -340,9 +340,7 @@ Make it simple & clear
 
 ```
 def validate_sessionid(username, value):
-    return 42 if value < 0 else (
-       hash(username) == value
-    )
+    return 42 if value < 0 else (hash(username) == value)
 
 def test_validate_sessionid__negative_session__special_value():
     assert validate_sessionid('admin', -1) == 42
