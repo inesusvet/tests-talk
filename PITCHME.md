@@ -246,11 +246,11 @@ def test_get_full_username__good_coverage__ok():
 Be a lazy developer
 
 ```
-def test_foobar__app_failed__error():
+def test_auth__app_failed__error():
     message = ‘not good’
     setup_error(message)
 
-    response = foobar(1, 2)
+    response = authorize('username', 'badpassword')
 
     assert_error(response, message)
 ```
