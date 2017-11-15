@@ -1,6 +1,3 @@
-@title[Blank]
-
----
 @title[Introduction]
 
 ## The test which will save your day
